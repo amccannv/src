@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SRC Elite</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Annie+Use+Your+Telescope&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bright: #ff4ea1;
+      --dark: #121115;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: var(--dark);
+      font-family: 'Montserrat', sans-serif;
+      color: white;
+      text-align: center;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-container {
+      position: relative;
+      display: inline-block;
+      transition: filter 0.3s ease-in-out, transform 0.3s ease-in-out;
+      max-width: 80vw;
+    }
+
+    .logo-container.hovered {
+      filter: drop-shadow(0 0 25px var(--bright));
+      transform: scale(1.05);
+    }
+
+    .logo {
+      max-width: 400px;
+      height: auto;
+    }
+
+    .sponsors {
+      position: absolute;
+      bottom: 20px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .sponsor-logo {
+      max-height: 30px;
+      filter: grayscale(100%) brightness(0.8);
+      transition: filter 0.3s;
+    }
+
+    .sponsor-logo:hover {
+      filter: none;
+    }
+
+    .sponsor-text {
+      font-family: "Annie Use Your Telescope", cursive;
+      font-size: 0.95rem;
+      color: #aaa;
+      transition: color 0.3s;
+    }
+
+    .sponsor-text:hover {
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="logo-container" id="logoContainer">
+    <img class="logo" src="logo.png" alt="SRC Elite Logo">
+  </div>
+
+  <div class="sponsors">
+    <!-- <img class="sponsor-logo" src="adidas.png" alt="Adidas"> -->
+    <div class="sponsor-text">Cafe 810</div>
+  </div>
+
+  <script>
+    const logo = document.getElementById('logoContainer');
+
+    logo.addEventListener('mouseenter', () => {
+      logo.classList.add('hovered');
+    });
+
+    logo.addEventListener('mouseleave', () => {
+      logo.classList.remove('hovered');
+    });
+  </script>
+</body>
+</html>
