@@ -3,235 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SRC Elite</title>
+  <title>Sunday Run Club</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
+  <link rel="manifest" href="favicon_io/site.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Annie+Use+Your+Telescope&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-    :root {
-      --bright: #ff4ea1;
-      --dark: #121115;
-      --nav-height: 60px; /* Define navbar height */
-    }
-
-    html {
-      scroll-behavior: smooth; /* Enable smooth scrolling */
-    }
-
-    body {
-      margin: 0;
-      padding: 0;
-      /* height: 100%; REMOVED - sections will manage height */
-      background: var(--dark);
-      font-family: 'Montserrat', sans-serif;
-      color: white;
-      text-align: center;
-      /* REMOVED Flex properties, sections will handle their content centering
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      */
-    }
-
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: var(--nav-height);
-      background-color: rgba(18, 17, 21, 0.85); /* var(--dark) with some transparency */
-      backdrop-filter: blur(10px);
-      display: flex;
-      justify-content: center; /* Center the nav links */
-      align-items: center;
-      z-index: 1000;
-      padding: 0 1rem;
-    }
-
-    .nav-logo {
-      position: absolute; /* Position logo absolutely on the left */
-      left: 1rem;
-      height: 40px; /* Smaller size for navbar */
-      cursor: pointer;
-      transition: filter 0.3s ease, opacity 0.3s ease; /* Added opacity transition */
-    }
-
-    .nav-logo.hidden {
-      opacity: 0;
-      pointer-events: none; /* Disable clicks when hidden */
-    }
-
-    .nav-logo:hover {
-      filter: drop-shadow(0 0 8px var(--bright));
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-      margin: 0 1rem;
-      padding: 0.5rem 0;
-      font-weight: 700;
-      transition: color 0.3s;
-    }
-
-    nav a:hover, nav a.active {
-      color: var(--bright);
-    }
-
-    section {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem; /* Add some padding to section content */
-      padding-top: calc(var(--nav-height) + 2rem); /* Add padding for fixed nav */
-    }
-
-    section:first-of-type {
-        /* padding-top specifically for the first section if nav is transparent,
-           or if you want content to appear "under" it before scroll.
-           Adjust as needed based on nav styling. */
-    }
-
-    #home {
-      /* Specific styles for home section if needed */
-    }
-    
-    #about, #events {
-        /* Placeholder styling */
-        font-size: 2rem;
-    }
-    
-    #sponsors-section .sponsors {
-        position: relative; /* Override absolute positioning */
-        bottom: auto;
-        width: auto; /* Let it be natural width or set as needed */
-        margin-top: 2rem; /* Add some space if needed */
-    }
-
-
-    .logo-container {
-      position: relative;
-      display: inline-block;
-      max-width: 80vw;
-      animation: neon-flicker 3s infinite ease-in-out;
-    }
-
-    .logo {
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-      max-width: 400px;
-      height: auto;
-    }
-
-    .sponsors {
-      /* position: absolute; Modified for #sponsors-section */
-      /* bottom: 20px; Modified for #sponsors-section */
-      /* width: 100%; Modified for #sponsors-section */
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 2rem;
-    }
-
-    .sponsor-logo {
-      max-height: 30px;
-      filter: grayscale(100%) brightness(0.8);
-      transition: filter 0.3s;
-    }
-
-    .sponsor-logo:hover {
-      filter: none;
-    }
-
-    .sponsor-text {
-      font-family: "Annie Use Your Telescope", cursive;
-      font-size: 0.95rem;
-      color: #aaa;
-      transition: color 0.3s;
-    }
-
-    .sponsor-text:hover {
-      color: white;
-    }
-
-    @keyframes neon-flicker {
-      0%, 69%, 76%, 89%, 100% {
-        filter: none;
-        transform: scale(1.0);
-      }
-      70% {
-        filter: drop-shadow(0 0 15px var(--bright)) drop-shadow(0 0 25px var(--bright)) drop-shadow(0 0 35px var(--bright));
-        transform: scale(1.03);
-      }
-      72% {
-        filter: drop-shadow(0 0 10px var(--bright)) drop-shadow(0 0 18px var(--bright));
-        transform: scale(1.01);
-      }
-      74% {
-        filter: drop-shadow(0 0 5px var(--bright));
-        transform: scale(1.0);
-      }
-      90% {
-        filter: drop-shadow(0 0 12px var(--bright)) drop-shadow(0 0 20px var(--bright));
-        transform: scale(1.02);
-      }
-      92% {
-        filter: drop-shadow(0 0 6px var(--bright));
-        transform: scale(1.0);
-      }
-    }
-
-    @media (max-width: 480px) {
-      nav {
-        height: auto;
-        padding: 0.5rem;
-      }
-      .nav-logo {
-        height: 35px;
-      }
-      nav a {
-        margin: 0 0.5rem;
-        font-size: 0.9rem;
-      }
-      section {
-        padding-top: calc(var(--nav-height) + 1rem); /* Adjust for potentially smaller nav */
-      }
-      .sponsors { /* This rule might need adjustment if it conflicts with #sponsors-section .sponsors */
-        position: relative;
-        bottom: auto;
-        flex-direction: column;
-        gap: 1rem;
-        margin-top: 2rem;
-      }
-
-      .sponsor-text {
-        font-size: 0.85rem;
-      }
-
-      .logo {
-        max-width: 300px;
-      }
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Sedgwick+Ave&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <nav id="navbar">
     <img class="nav-logo" src="logo.png" alt="SRC Elite Logo" onclick="scrollToSection('home')">
     <div class="nav-links">
       <a href="#about">About</a>
-      <a href="#sponsors-section">Sponsors</a>
+      <a href="#sponsors-section">Support</a>
       <a href="#events">Events</a>
     </div>
   </nav>
@@ -240,102 +27,84 @@
     <div class="logo-container" id="logoContainer">
       <img class="logo" src="logo.png" alt="SRC Elite Logo">
     </div>
+    <div class="about-in-home">
+      <h2>Sunday Run Club Elite is a high-performance running team based in London and Guadalajara</h2>
+    </div>
   </section>
 
   <section id="about">
-    <h2>About Us</h2>
-    <p>Details about SRC Elite coming soon!</p>
+    <div class="hero-title">Sunday Run Club Elite</div>
+    <div class="hero-subtitle">High-performance. Low profile. Built for breakthroughs.</div>
+    <div class="hero-description">
+      Rooted in London and Guadalajara, Sunday Run Club Elite is a global distance team training with relentless intent and quiet confidence.
+    </div>
+
+    <div class="sections-container">
+      <div class="section-row">
+        <div class="section-title">OUR VISION</div>
+        <div class="section-content">
+          <div class="mission-item">
+            Results over noise.
+            We don't chase attention. We chase finish lines — and we cross them first.
+          </div>
+        </div>
+      </div>
+    
+      <div class="section-row">
+        <div class="section-title">OUR APPROACH</div>
+        <div class="section-content">
+          <div class="mission-item">
+            Train precisely. Race fearlessly. Stay grounded.
+          </div>
+        </div>
+      </div>
+    
+      <div class="section-row">
+        <div class="section-title">OUR VALUES</div>
+        <div class="section-content">
+          <div class="mission-item">
+            Excellence is earned. Focused, resilient, professional. Every rep, every day.
+          </div>
+          <div class="mission-item">
+            Community matters.
+            We lift each other up.
+          </div>
+          <div class="mission-item">
+            No shortcuts.
+            Clean sport. Zero tolerance for doping, abuse, or excuses.
+          </div>
+          <div class="mission-item">
+            Keep it human.
+            We work hard. We stay present. We laugh when we can.
+          </div>
+        </div>
+      </div>
+    </div>
+    
+
+    <div class="stealth-note">
+      Sunday Run Club Elite is not currently recruiting athletes.
+    </div>
   </section>
 
   <section id="sponsors-section">
-    <h2>Our Sponsors</h2>
+    <h2>Supported By</h2>
     <div class="sponsors">
-      <!-- <img class="sponsor-logo" src="adidas.png" alt="Adidas"> -->
-      <div class="sponsor-text">Cafe 810</div>
-      <!-- Add more sponsor logos or text here -->
+      <img class="sponsor-logo" src="bb.png" alt="Barbs Builds">
+      <img class="sponsor-logo" src="cafe_810.png" alt="Cafe 810">
+      <img class="sponsor-logo" src="adidas.png" alt="Adidas">
     </div>
   </section>
 
   <section id="events">
     <h2>Upcoming Events</h2>
-    <p>Event details will be posted here.</p>
+    <div class="event">
+      <h3>Forest City Road Races Elite Dinner and Gala</h3>
+      <p><strong>Location:</strong> Cafe 810</p>
+      <p><strong>Date:</strong> June 7th, 5pm</p>
+    </div>
   </section>
 
-  <script>
-    // JavaScript for active nav link highlighting and potentially more complex scroll later
-    document.addEventListener('DOMContentLoaded', () => {
-      const sections = document.querySelectorAll('section');
-      const navLinks = document.querySelectorAll('nav a');
-      const navLogo = document.querySelector('.nav-logo');
-
-      // Function to update active nav link
-      const updateActiveLink = () => {
-        let currentSectionId = '';
-        sections.forEach(section => {
-          const sectionTop = section.offsetTop - (document.getElementById('navbar').offsetHeight + 50); // Adjust offset as needed
-          const sectionHeight = section.offsetHeight;
-          if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
-            currentSectionId = section.getAttribute('id');
-          }
-        });
-
-        navLinks.forEach(link => {
-          link.classList.remove('active');
-          if (link.getAttribute('href') === '#' + currentSectionId) {
-            link.classList.add('active');
-          }
-        });
-
-        // Hide/show nav logo based on current section
-        if (currentSectionId === 'home') {
-          navLogo.classList.add('hidden');
-        } else {
-          navLogo.classList.remove('hidden');
-        }
-      };
-
-      // Initial call and on scroll
-      updateActiveLink();
-      window.addEventListener('scroll', updateActiveLink);
-
-      // Smooth scroll for nav links (CSS scroll-behavior is primary, this is a fallback/enhancement)
-      navLinks.forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-          const targetId = this.getAttribute('href');
-          // Check if it's an internal link
-          if (targetId.startsWith('#')) {
-            e.preventDefault();
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-              // Calculate scroll position considering the fixed navbar
-              const navHeight = document.getElementById('navbar').offsetHeight;
-              const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-              const offsetPosition = elementPosition - navHeight;
-              
-              window.scrollTo({
-                top: offsetPosition,
-                behavior: 'smooth'
-              });
-            }
-          }
-        });
-      });
-    });
-
-    // Function to scroll to a specific section (for logo click)
-    function scrollToSection(sectionId) {
-      const targetElement = document.getElementById(sectionId);
-      if (targetElement) {
-        const navHeight = document.getElementById('navbar').offsetHeight;
-        const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-        const offsetPosition = elementPosition - navHeight;
-        
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        });
-      }
-    }
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
