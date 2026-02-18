@@ -1,74 +1,36 @@
-// JavaScript for active nav link highlighting and potentially more complex scroll later
 document.addEventListener('DOMContentLoaded', () => {
-  const sections = document.querySelectorAll('section');
-  const navLinks = document.querySelectorAll('nav a');
-  const navLogo = document.querySelector('.nav-logo');
+  const sections = document.querySelectorAll('main section');
+  const navLinks = document.querySelectorAll('#navbar .nav-links a');
+  const nav = document.getElementById('navbar');
 
-  // Function to update active nav link
-  const updateActiveLink = () => {
-    let currentSectionId = '';
-    sections.forEach(section => {
-      const sectionTop = section.offsetTop - (document.getElementById('navbar').offsetHeight + 50); // Adjust offset as needed
-      const sectionHeight = section.offsetHeight;
-      if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
-        currentSectionId = section.getAttribute('id');
-      }
-    });
-
+  const setActiveLink = (currentSectionId) => {
     navLinks.forEach(link => {
       link.classList.remove('active');
       if (link.getAttribute('href') === '#' + currentSectionId) {
         link.classList.add('active');
       }
     });
-
-    // Hide/show nav logo based on current section
-    if (currentSectionId === 'home') {
-      navLogo.classList.add('hidden');
-    } else {
-      navLogo.classList.remove('hidden');
-    }
   };
 
-  // Initial call and on scroll
-  updateActiveLink();
-  window.addEventListener('scroll', updateActiveLink);
+  const navHeight = nav?.offsetHeight ?? 0;
+  const observer = new IntersectionObserver(
+    (entries) => {
+      const visible = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
 
-  // Smooth scroll for nav links (CSS scroll-behavior is primary, this is a fallback/enhancement)
-  navLinks.forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      const targetId = this.getAttribute('href');
-      // Check if it's an internal link
-      if (targetId.startsWith('#')) {
-        e.preventDefault();
-        const targetElement = document.querySelector(targetId);
-        if (targetElement) {
-          // Calculate scroll position considering the fixed navbar
-          const navHeight = document.getElementById('navbar').offsetHeight;
-          const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-          const offsetPosition = elementPosition - navHeight;
-          
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
-          });
-        }
+      if (visible?.target?.id) {
+        setActiveLink(visible.target.id);
       }
-    });
-  });
-});
+    },
+    {
+      threshold: 0.55,
+      rootMargin: `-${navHeight}px 0px -45% 0px`
+    }
+  );
 
-// Function to scroll to a specific section (for logo click)
-function scrollToSection(sectionId) {
-  const targetElement = document.getElementById(sectionId);
-  if (targetElement) {
-    const navHeight = document.getElementById('navbar').offsetHeight;
-    const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-    const offsetPosition = elementPosition - navHeight;
-    
-    window.scrollTo({
-      top: offsetPosition,
-      behavior: 'smooth'
-    });
-  }
-} 
+  sections.forEach((section) => observer.observe(section));
+
+  const initialId = window.location.hash?.replace('#', '') || sections[0]?.getAttribute('id');
+  if (initialId) setActiveLink(initialId);
+});

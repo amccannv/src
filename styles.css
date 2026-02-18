@@ -1,34 +1,44 @@
-* {
-  box-sizing: border-box;
-}
-
 :root {
   --bright: #ff4ea1;
+  --pink-glow: rgba(255, 78, 161, 0.25);
   --dark: #121115;
-  --nav-height: 60px; /* Define navbar height */
-  
-  /* Font Option: Sedgwick Ave + Roboto ExtraLight */
-  --header-font: 'Sedgwick Ave', cursive;
-  --body-font: 'Roboto', sans-serif;
+  --surface: rgba(255, 255, 255, 0.04);
+  --surface-strong: rgba(255, 255, 255, 0.08);
+  --line: rgba(255, 255, 255, 0.14);
+  --text: #f6f3f7;
+  --muted: rgba(255, 255, 255, 0.7);
+  --nav-bg: rgba(18, 17, 21, 0.85);
+  --bg-base: radial-gradient(1400px 700px at 5% 10%, rgba(255, 78, 161, 0.15), transparent 45%),
+    radial-gradient(900px 500px at 85% 10%, rgba(255, 78, 161, 0.12), transparent 45%),
+    linear-gradient(180deg, #0b0a0e 0%, #030203 70%);
+  --border-radius-lg: 18px;
+  --border-radius-sm: 12px;
+  --nav-height: 68px;
+  --header-font: 'Bebas Neue', sans-serif;
+  --body-font: 'Barlow Condensed', sans-serif;
 }
 
-html {
-  scroll-behavior: smooth; /* Enable smooth scrolling */
+* {
+  box-sizing: border-box;
 }
 
 body {
   margin: 0;
   padding: 0;
-  /* height: 100%; REMOVED - sections will manage height */
-  background: var(--dark);
+  min-height: 100vh;
+  background: var(--bg-base);
   font-family: var(--body-font);
-  color: white;
-  text-align: center;
+  color: var(--text);
+  letter-spacing: 0.02em;
+  line-height: 1.5;
+  overflow-x: hidden;
+  transition: background 0.45s ease, color 0.35s ease;
 }
 
-/* Apply header font to all headings and nav */
-h1, h2, h3, h4, h5, h6, nav a, .hero-title, .hero-subtitle, .section-title {
-  font-family: var(--header-font);
+html {
+  scroll-behavior: smooth;
+  scroll-snap-type: y proximity;
+  scroll-padding-top: var(--nav-height);
 }
 
 nav {
@@ -37,369 +47,259 @@ nav {
   left: 0;
   width: 100%;
   height: var(--nav-height);
-  background-color: rgba(18, 17, 21, 0.85); /* var(--dark) with some transparency */
-  backdrop-filter: blur(10px);
-  display: flex;
-  justify-content: center; /* Center the nav links */
-  align-items: center;
+  background: transparent;
+  border-bottom: none;
+  backdrop-filter: blur(18px);
   z-index: 1000;
-  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-brand {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  gap: 0.9rem;
+}
+
+.nav-wordmark {
+  color: var(--text);
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: none;
+  font-size: 1rem;
+  white-space: nowrap;
+}
+
+.nav-inner {
+  width: min(1200px, 94vw);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
 }
 
 .nav-logo {
-  position: absolute; /* Position logo absolutely on the left */
-  left: 1rem;
-  height: 40px; /* Smaller size for navbar */
+  height: 40px;
   cursor: pointer;
-  transition: filter 0.3s ease, opacity 0.3s ease; /* Added opacity transition */
-}
-
-.nav-logo.hidden {
-  opacity: 0;
-  pointer-events: none; /* Disable clicks when hidden */
-}
-
-.nav-logo:hover {
-  filter: drop-shadow(0 0 8px var(--bright));
+  transition: opacity 0.3s ease;
 }
 
 .nav-links {
   display: flex;
-  align-items: center;
+  gap: 1.5rem;
 }
 
-nav a {
-  color: white;
+.nav-links a {
+  color: var(--text);
   text-decoration: none;
-  margin: 0 1rem;
-  padding: 0.5rem 0;
-  font-weight: 700;
-  transition: color 0.3s;
+  font-weight: 400;
+  font-size: 1.05rem;
+  letter-spacing: 0.08em;
+  transition: color 0.25s ease;
 }
 
-nav a:hover, nav a.active {
+.nav-links a:hover,
+.nav-links a.active {
   color: var(--bright);
 }
 
+main {
+  padding-top: 0;
+}
+
 section {
+  width: min(1200px, 94vw);
+  margin: 0 auto;
   min-height: 100vh;
+  min-height: 100svh;
+  scroll-snap-align: start;
+  scroll-margin-top: var(--nav-height);
+  padding: calc(var(--nav-height) + 2.75rem) 0 3.25rem;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+  gap: 2rem;
+}
+
+.hero-section {
+  display: grid;
+  grid-template-columns: minmax(220px, 360px) 1fr;
   align-items: center;
-  justify-content: center;
-  padding: 2rem; /* Add some padding to section content */
-  padding-top: calc(var(--nav-height) + 2rem); /* Add padding for fixed nav */
+  gap: clamp(2rem, 5vw, 6rem);
+  align-content: center;
 }
 
-section:first-of-type {
-    /* padding-top specifically for the first section if nav is transparent,
-       or if you want content to appear "under" it before scroll.
-       Adjust as needed based on nav styling. */
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
 }
 
-#home {
-  /* Specific styles for home section if needed */
+.eyebrow {
+  font-size: 1rem;
+  letter-spacing: 0.12em;
+  text-transform: none;
+  color: var(--muted);
+  margin: 0;
 }
 
-#about, #events {
-    /* Placeholder styling */
-    font-size: 2rem;
+h1 {
+  font-family: var(--header-font);
+  font-size: clamp(3.6rem, 6vw, 6.75rem);
+  font-weight: 400;
+  line-height: 0.92;
+  margin: 0;
 }
 
-#sponsors-section .sponsors {
-    position: relative; /* Override absolute positioning */
-    bottom: auto;
-    width: auto; /* Let it be natural width or set as needed */
-    margin-top: 2rem; /* Add some space if needed */
+.hero-lede {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.78);
+  max-width: 46ch;
+  line-height: 1.35;
+  font-size: clamp(1.35rem, 1.75vw, 1.85rem);
+  letter-spacing: 0.01em;
 }
 
-#sponsors-section h2 {
-  font-size: 3rem; /* Make title larger */
-  margin-bottom: 3rem;
-  margin-top: 0; /* Reduce top margin to move it up */
-  color: white; /* Changed from var(--bright) to white */
+.logo-container {
+  justify-self: center;
 }
 
-#sponsors-section {
-  padding-top: 1rem; /* Reduce section padding to move title up */
+.logo {
+  width: min(320px, 70vw);
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  filter: drop-shadow(0 0 26px rgba(255, 78, 161, 0.3));
+}
+
+.hero-section .logo-container {
+  justify-self: start;
+}
+
+.hero-section .logo {
+  margin: 0;
+}
+
+.section-head h2 {
+  font-family: var(--header-font);
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 400;
+  line-height: 1.0;
+  margin: 0.25rem 0 0.5rem;
+}
+
+.section-lede {
+  margin: 0;
+  color: var(--muted);
+  max-width: 720px;
+  line-height: 1.55;
+  font-size: 1.15rem;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.info-card {
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01));
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--border-radius-lg);
+  padding: 2rem;
+  min-height: 180px;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.3);
+  transition: transform 0.35s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.info-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255, 78, 161, 0.35);
+}
+
+.info-card h3 {
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+  font-size: 1.6rem;
+  font-weight: 400;
+}
+
+.info-card p,
+.info-card li {
+  color: var(--muted);
+  line-height: 1.55;
+  font-size: 1.1rem;
+}
+
+.info-card ul {
+  margin: 0;
+  padding-left: 1.2rem;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.stealth-note {
+  margin: 1.25rem 0 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.95rem;
+  font-style: italic;
 }
 
 .sponsors {
-  /* position: absolute; Modified for #sponsors-section */
-  /* bottom: 20px; Modified for #sponsors-section */
-  /* width: 100%; Modified for #sponsors-section */
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   align-items: center;
-  gap: 2rem; /* Space between logos */
-  flex-wrap: nowrap; /* Prevent wrapping on desktop */
-  max-width: 1200px; /* Constrain total width */
-  margin: 0 auto; /* Center the container */
-  padding: 0 2rem; /* Add some padding */
+  gap: 2rem;
+  margin-top: 1rem;
 }
 
 .sponsor-logo {
-  flex: 1 1 200px; /* Equal grow/shrink with 200px base size */
-  max-width: 450px; /* Increased max width for better space usage */
-  height: 200px; /* Increased height for desktop visibility */
-  object-fit: contain; /* Maintain aspect ratio */
-  transition: transform 0.3s;
+  width: 100%;
+  height: 140px;
+  object-fit: contain;
+  filter: grayscale(0.1);
+  transition: transform 0.3s ease, filter 0.3s ease;
 }
 
 .sponsor-logo:hover {
-  transform: scale(1.05); /* Add slight hover scale */
+  transform: translateY(-6px);
+  filter: drop-shadow(0 10px 30px rgba(255, 78, 161, 0.2));
 }
 
-.sponsor-text {
-  font-family: "Sedgwick Ave Display", cursive;
-  font-size: 0.95rem;
-  color: #aaa;
-  transition: color 0.3s;
-}
-
-.sponsor-text:hover {
-  color: white;
-}
-
-@keyframes neon-flicker {
-  0%, 69%, 76%, 89%, 100% {
-    filter: none;
-    transform: scale(1.0);
-  }
-  70% {
-    filter: drop-shadow(0 0 15px var(--bright)) drop-shadow(0 0 25px var(--bright)) drop-shadow(0 0 35px var(--bright));
-    transform: scale(1.03);
-  }
-  72% {
-    filter: drop-shadow(0 0 10px var(--bright)) drop-shadow(0 0 18px var(--bright));
-    transform: scale(1.01);
-  }
-  74% {
-    filter: drop-shadow(0 0 5px var(--bright));
-    transform: scale(1.0);
-  }
-  90% {
-    filter: drop-shadow(0 0 12px var(--bright)) drop-shadow(0 0 20px var(--bright));
-    transform: scale(1.02);
-  }
-  92% {
-    filter: drop-shadow(0 0 6px var(--bright));
-    transform: scale(1.0);
+@media (max-width: 960px) {
+  .info-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   }
 }
 
-@media (max-width: 480px) {
-  nav {
-    height: auto;
-    padding: 0.5rem;
-  }
-  .nav-logo {
-    height: 35px;
-  }
-  nav a {
-    margin: 0 0.5rem;
-    font-size: 0.9rem;
-  }
-  section {
-    padding-top: calc(var(--nav-height) + 1rem); /* Adjust for potentially smaller nav */
-  }
-  
-  #sponsors-section h2 {
-    font-size: 2rem; /* Smaller title on mobile */
-    margin-bottom: 2rem;
-    margin-top: 0; /* Keep consistent on mobile */
-  }
-  
-  .sponsors {
-    flex-direction: column; /* Stack vertically on mobile */
-    flex-wrap: nowrap; /* Keep nowrap even on mobile since we're using column */
-    gap: 2rem; /* Reduce gap on mobile */
-    max-width: 100%; /* Use full width on mobile */
-    padding: 0 1rem; /* Reduce padding on mobile */
-  }
-  
-  .sponsor-logo {
-    flex: 1 1 auto; /* Allow flexible sizing on mobile */
-    max-width: 350px; /* Increased max width for mobile */
-    width: 100%; /* Use full available width */
-    height: 160px; /* Increased height for better visibility on mobile */
-    object-fit: contain; /* Maintain aspect ratio */
-  }
-  
-  .sponsors { /* This rule might need adjustment if it conflicts with #sponsors-section .sponsors */
-    position: relative;
-    bottom: auto;
-    flex-direction: column;
-    gap: 1rem;
-    margin-top: 2rem;
+@media (max-width: 720px) {
+  .hero-section {
+    grid-template-columns: 1fr;
+    text-align: center;
   }
 
-  .sponsor-text {
-    font-size: 0.85rem;
+  .nav-wordmark {
+    display: none;
   }
 
   .logo {
-    max-width: min(250px, 90vw); /* Responsive: smaller of 250px or 90% viewport width */
+    max-width: 260px;
   }
-}
 
-@media (min-width: 1600px) {
-  #about {
-    max-width: 1400px;
+  .hero-section .logo-container {
+    justify-self: center;
+  }
+
+  .hero-section .logo {
     margin: 0 auto;
   }
 }
 
-/* About content in home section - visible on desktop only */
-.about-in-home {
-  margin-top: 3rem;
-  max-width: 800px;
-  text-align: center;
-}
-
-.about-in-home h2 {
-  font-size: 1.8rem;
-  margin-bottom: 1rem;
-}
-
-.about-in-home p {
-  font-size: 1.2rem;
-  line-height: 1.5;
-}
-
-/* About section styling */
-#about {
-  text-align: left;
-  padding: 2rem 2rem; /* Reduced from 3rem 2rem */
-  width: 100%;
-}
-
-#about .hero-title {
-  font-size: 3rem;
-  margin-bottom: 0.25rem; /* Reduced from 0.5rem */
-  text-align: center;
-}
-
-#about .hero-subtitle {
-  font-size: 1.5rem;
-  margin-bottom: 1rem; /* Reduced from 2rem */
-  text-align: center;
-  color: var(--bright);
-}
-
-#about .hero-description {
-  font-size: 1.2rem;
-  line-height: 1.6;
-  margin-bottom: 0.5rem; /* Reduced from 1rem */
-  text-align: center;
-}
-
-/* Two-column layout for desktop */
-@media (min-width: 769px) {
-  #about .sections-container {
-    display: grid;
-    grid-template-columns: 250px 1fr;
-    gap: 2rem 4rem; /* Reduced vertical gap from 4rem to 2rem */
-    margin: 1rem 0; /* Reduced from 1.5rem 0 */
-    align-items: start;
-  }
-
-  .section-row {
-    display: contents;
-  }
-
-  .section-title {
-    font-size: 2rem;
-    margin: 0;
-    padding: 0;
-    color: var(--bright);
-    text-align: right;
-    line-height: 2rem;
-    white-space: nowrap;
-    display: block;
-  }
-
-  .section-content {
-    font-size: 1.3rem;
-    line-height: 1.7;
-    margin: 0;
-    padding: 0;
-    display: block;
-    margin-bottom: 0.5rem; /* Reduced from 1.5rem */
+@media (max-width: 520px) {
+  .nav-links a {
+    letter-spacing: 0.12em;
   }
 }
-
-/* Single column layout for mobile */
-@media (max-width: 768px) {
-  .about-in-home {
-    display: none;
-  }
-  
-  #about {
-    text-align: center; /* Override left alignment for mobile */
-    padding: 2rem 1rem; /* Reduce padding on mobile */
-  }
-  
-  #about .sections-container {
-    text-align: center; /* Ensure container is centered */
-  }
-  
-  #about .section-title {
-    font-size: 2rem;
-    margin: 3rem 0 1.5rem 0;
-    color: var(--bright);
-    text-align: center; /* Center titles on mobile */
-  }
-
-  #about .section-content {
-    font-size: 1.1rem;
-    line-height: 1.7;
-    margin-bottom: 2rem;
-    text-align: center; /* Center content on mobile */
-  }
-  
-  #about .hero-title,
-  #about .hero-subtitle,
-  #about .hero-description {
-    text-align: center; /* Ensure hero content is centered */
-  }
-  
-  section {
-    text-align: center; /* Ensure all sections are centered on mobile */
-    padding: 2rem 1rem; /* Consistent mobile padding */
-  }
-}
-
-#about .mission-item {
-  margin: 0.25rem 0; /* Reduced from 0.5rem 0 */
-}
-
-#about .mission-number {
-  color: var(--bright);
-  font-weight: bold;
-  font-size: 1.2rem;
-}
-
-#about .stealth-note {
-  text-align: center;
-  font-style: italic;
-  margin-top: 1rem; /* Reduced from 1.5rem */
-  padding: 1rem; /* Reduced from 1.5rem */
-  border-top: 1px solid #333;
-  color: #ccc;
-}
-
-.logo-container {
-  position: relative;
-  display: inline-block;
-  max-width: 80vw;
-  animation: neon-flicker 3s infinite ease-in-out;
-}
-
-.logo {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  max-width: min(400px, 80vw); /* Responsive: smaller of 400px or 80% viewport width */
-  height: auto;
-} 

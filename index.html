@@ -10,100 +10,72 @@
   <link rel="manifest" href="favicon_io/site.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Sedgwick+Ave&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <nav id="navbar">
-    <img class="nav-logo" src="logo.png" alt="SRC Elite Logo" onclick="scrollToSection('home')">
-    <div class="nav-links">
-      <a href="#about">About</a>
-      <a href="#sponsors-section">Support</a>
-      <a href="#events">Events</a>
+    <div class="nav-inner">
+      <a class="nav-brand" href="#home" aria-label="Sunday Run Club Elite home">
+        <img class="nav-logo" src="logo.png" alt="SRC Elite Logo">
+      </a>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#sponsors-section">Support</a>
+      </div>
     </div>
   </nav>
 
-  <section id="home">
-    <div class="logo-container" id="logoContainer">
-      <img class="logo" src="logo.png" alt="SRC Elite Logo">
-    </div>
-    <div class="about-in-home">
-      <h2>Sunday Run Club Elite is a high-performance running team based in London and Guadalajara</h2>
-    </div>
-  </section>
-
-  <section id="about">
-    <div class="hero-title">Sunday Run Club Elite</div>
-    <div class="hero-subtitle">High-performance. Low profile. Built for breakthroughs.</div>
-    <div class="hero-description">
-      Rooted in London and Guadalajara, Sunday Run Club Elite is a global distance team training with relentless intent and quiet confidence.
-    </div>
-
-    <div class="sections-container">
-      <div class="section-row">
-        <div class="section-title">OUR VISION</div>
-        <div class="section-content">
-          <div class="mission-item">
-            Results over noise.
-            We don't chase attention. We chase finish lines — and we cross them first.
-          </div>
-        </div>
+  <main>
+    <section id="home" class="hero-section">
+      <div class="logo-container">
+        <img class="logo" src="logo.png" alt="SRC Elite Logo">
       </div>
-    
-      <div class="section-row">
-        <div class="section-title">OUR APPROACH</div>
-        <div class="section-content">
-          <div class="mission-item">
-            Train precisely. Race fearlessly. Stay grounded.
-          </div>
-        </div>
+      <div class="hero-text">
+        <p class="eyebrow">Elite Distance Team</p>
+        <h1>Sunday Run Club Elite</h1>
+        <p class="hero-lede">Built on quiet work and clean sport.</p>
       </div>
-    
-      <div class="section-row">
-        <div class="section-title">OUR VALUES</div>
-        <div class="section-content">
-          <div class="mission-item">
-            Excellence is earned. Focused, resilient, professional. Every rep, every day.
-          </div>
-          <div class="mission-item">
-            Community matters.
-            We lift each other up.
-          </div>
-          <div class="mission-item">
-            No shortcuts.
-            Clean sport. Zero tolerance for doping, abuse, or excuses.
-          </div>
-          <div class="mission-item">
-            Keep it human.
-            We work hard. We stay present. We laugh when we can.
-          </div>
-        </div>
+    </section>
+
+    <section id="about">
+      <div class="section-head">
+        <h2>High-performance. Low profile.</h2>
+        <p class="section-lede">
+          Rooted in London and Guadalajara, we rely on long-term development and relentless pursuit.
+        </p>
       </div>
-    </div>
-    
 
-    <div class="stealth-note">
-      Sunday Run Club Elite is not currently recruiting athletes.
-    </div>
-  </section>
+      <div class="info-grid">
+        <article class="info-card">
+          <h3>Vision</h3>
+          <p>Precision training, thoughtful recovery, and measured racing.</p>
+        </article>
+        <article class="info-card">
+          <h3>Approach</h3>
+          <p>Lean plans and a support culture that keeps athletes grounded.</p>
+        </article>
+        <article class="info-card">
+          <h3>Commitment</h3>
+          <p>Performance driven, clean, and led by empathy.</p>
+        </article>
+      </div>
 
-  <section id="sponsors-section">
-    <h2>Supported By</h2>
-    <div class="sponsors">
-      <img class="sponsor-logo" src="bb.png" alt="Barbs Builds">
-      <img class="sponsor-logo" src="cafe_810.png" alt="Cafe 810">
-      <img class="sponsor-logo" src="adidas.png" alt="Adidas">
-    </div>
-  </section>
+      <p class="stealth-note">Not currently recruiting athletes.</p>
+    </section>
 
-  <section id="events">
-    <h2>Upcoming Events</h2>
-    <div class="event">
-      <h3>Forest City Road Races Elite Dinner and Gala</h3>
-      <p><strong>Location:</strong> Cafe 810</p>
-      <p><strong>Date:</strong> June 7th, 5pm</p>
-    </div>
-  </section>
+    <section id="sponsors-section">
+      <div class="section-head">
+        <p class="eyebrow">Sponsors</p>
+        <h2>Partners who keep us moving</h2>
+      </div>
+      <div class="sponsors">
+        <img class="sponsor-logo" src="bb.png" alt="Barbs Builds">
+        <img class="sponsor-logo" src="cafe_810.png" alt="Cafe 810">
+        <img class="sponsor-logo" src="adidas.png" alt="Adidas">
+      </div>
+    </section>
+  </main>
 
   <script src="script.js"></script>
 </body>
