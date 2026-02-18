@@ -59,6 +59,13 @@ nav {
   align-items: center;
   text-decoration: none;
   gap: 0.9rem;
+  position: absolute;
+  left: clamp(0.9rem, 2vw, 1.5rem);
+  top: 50%;
+  transform: translateY(calc(-50% - 4px));
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .nav-wordmark {
@@ -74,7 +81,7 @@ nav {
   width: min(1200px, 94vw);
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   gap: 1.5rem;
 }
 
@@ -101,6 +108,19 @@ nav {
 .nav-links a:hover,
 .nav-links a.active {
   color: var(--bright);
+}
+
+#navbar.navbar--past-hero .nav-brand {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(-50%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-brand,
+  .nav-links a {
+    transition: none;
+  }
 }
 
 main {
