@@ -37,7 +37,6 @@ body {
 
 html {
   scroll-behavior: smooth;
-  scroll-snap-type: y proximity;
   scroll-padding-top: var(--nav-height);
 }
 
@@ -49,7 +48,6 @@ nav {
   height: var(--nav-height);
   background: transparent;
   border-bottom: none;
-  backdrop-filter: blur(18px);
   z-index: 1000;
   display: flex;
   align-items: center;
@@ -114,7 +112,6 @@ section {
   margin: 0 auto;
   min-height: 100vh;
   min-height: 100svh;
-  scroll-snap-align: start;
   scroll-margin-top: var(--nav-height);
   padding: calc(var(--nav-height) + 2.75rem) 0 3.25rem;
   display: flex;
